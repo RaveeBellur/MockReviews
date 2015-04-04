@@ -24,15 +24,17 @@ public class TestBase {
 
 
     private void setExpectations(ClientAndServer mockServer) {
-        expectationForGetRequest(mockServer);
+        expectationForGetPostByIdRequest(mockServer);
+        expectationForGetAllPostsRequest(mockServer);
     }
 
-    private void expectationForGetRequest(ClientAndServer mockServer) {
+    private void expectationForGetPostByIdRequest(ClientAndServer mockServer) {
         String responseString = "{" +
                 "\"title\":\"Palm tree\"," +
                 "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
                 "\"email\":\"tom@tv.com\"" +
                 "}";
+
         mockServer
                 .when(
                         request()
@@ -42,10 +44,32 @@ public class TestBase {
                         response()
                                 .withStatusCode(200)
                                 .withHeaders(
-                                        new Header("Content-Type", "application/json; charset=utf-8")
+                                        new Header("Content-Type", "application/json")
                                 )
                                 .withBody(responseString));
     }
+
+    private void expectationForGetAllPostsRequest(ClientAndServer mockServer) {
+        String responseString = "{[{" +
+                "\"title\":\"Palm tree\"," +
+                "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
+                "\"email\":\"tom@tv.com\"" +
+                "}]}";
+
+        mockServer
+                .when(
+                        request()
+                                .withPath("/posts")
+                                .withMethod("GET"))
+                .respond(
+                        response()
+                                .withStatusCode(200)
+                                .withHeaders(
+                                        new Header("Content-Type", "application/json")
+                                )
+                                .withBody(responseString));
+    }
+
 
 
 }

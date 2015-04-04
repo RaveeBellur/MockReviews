@@ -1,0 +1,22 @@
+# ignore build folders
+.gradle
+bin
+build
+target
+out
+
+# ignore eclipse project files
+.classpath
+.project
+.settings
+
+# ignore idea project files
+.idea
+*.iml
+*.ipr
+*.iws
+
+# ignore project runtime files
+logs
+
+

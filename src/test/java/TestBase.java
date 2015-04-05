@@ -32,6 +32,7 @@ public class TestBase {
         String responseString = "{" +
                 "\"title\":\"Palm tree\"," +
                 "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
+                "\"author\":\"Tom\"," +
                 "\"email\":\"tom@tv.com\"" +
                 "}";
 
@@ -53,6 +54,7 @@ public class TestBase {
         String responseString = "{[{" +
                 "\"title\":\"Palm tree\"," +
                 "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
+                "\"author\":\"Tom\"," +
                 "\"email\":\"tom@tv.com\"" +
                 "}]}";
 

@@ -8,12 +8,16 @@ import static org.testng.Assert.assertEquals;
 public class GetPostsTests extends TestBase {
 
     @Test
-    public void shouldReturnAPostWithTitlePalmTree() {
+    public void shouldReturnAPostById() {
 
-        given().request().with()
+        given()
+                .request().with()
                 .contentType("application/json")
-                .when().get("http://127.0.0.1:8080/posts/1")
-                .then().assertThat().body("title", equalTo("Palm tree"));
+        .when()
+                .get("http://127.0.0.1:8080/posts/1")
+        .then()
+                .assertThat().body("title", equalTo("Palm tree"))
+                .assertThat().body("author", equalTo("Tom"));
 
     }
 
@@ -36,22 +40,4 @@ public class GetPostsTests extends TestBase {
 
     }
 
-
-    @Test
-    public void shouldReturnAPost() {
-
-        String expectedResponseString="{" +
-                "\"title\":\"Palm tree\","+
-                "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
-                "\"email\":\"tom@tv.com\"" +
-                "}";
-
-        Response response = given().request().with()
-                .contentType("application/json")
-                .when().get("http://127.0.0.1:8080/posts/1");
-
-        assertEquals(response.getStatusCode(), 200);
-        assertEquals(response.asString(), expectedResponseString);
-
-    }
 }

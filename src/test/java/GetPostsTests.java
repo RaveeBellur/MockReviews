@@ -11,13 +11,12 @@ public class GetPostsTests extends TestBase {
     public void shouldReturnAPostById() {
 
         given()
-                .request().with()
-                .contentType("application/json")
+                .request()
         .when()
-                .get("http://127.0.0.1:8080/posts/1")
+                .get("http://localhost:8080/posts/1")
         .then()
-                .assertThat().body("title", equalTo("Palm tree"))
-                .assertThat().body("author", equalTo("Tom"));
+                .assertThat().statusCode(200)
+                .assertThat().body("title", equalTo("Palm tree"));
 
     }
 
@@ -32,7 +31,7 @@ public class GetPostsTests extends TestBase {
 
         Response response = given().request().with()
                 .contentType("application/json")
-                .when().get("http://127.0.0.1:8080/posts");
+                .when().get("http://localhost:8080/posts");
 
         assertEquals(response.getStatusCode(), 200);
         assertEquals(response.asString(), expectedResponseString);

@@ -1,0 +1,60 @@
+{
+  "apiVersion": "1.0",
+  "posts": [
+    {
+      "id": "1",
+      "title": "Palm Tree",
+      "body": "Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates",
+      "author": "Tom",
+      "email": "tom@tv.com",
+      "comments": [
+        {
+          "id": "101",
+          "comment": "Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates",
+          "commenter": "Jerry",
+          "email": "jerry@tv.com"
+        },
+        {
+          "id": "102",
+          "comment": "Palm tree seeds are the highest level fruit tree patch seeds",
+          "commenter": "Tuffy",
+          "email": "tuffy@tv.com"
+        }
+
+      ]
+    },
+
+    {
+      "id": "2",
+      "title": "Neem Tree",
+      "body": "Neem (Azadirachta indica) is a tree in the mahogany family Meliaceae.",
+      "author": "Tom",
+      "email": "tom@tv.com",
+      "comments": [
+        {
+          "id": "201",
+          "comment": "The neem plant is a fast growing and long living tree",
+          "commenter": "Jerry",
+          "email": "jerry@tv.com"
+        }
+      ]
+    },
+
+    {
+      "id": "3",
+      "title": "Banyan Tree",
+      "body": "Banyan often refers specifically to the Indian banyan (Ficus benghalensis), which is the national tree of the Republic of India",
+      "author": "Mickey",
+      "email": "mickey@tv.com",
+      "comments": [
+        {
+          "id": "301",
+          "comment": "The seeds of banyans are dispersed by fruit-eating birds",
+          "commenter": "Donald",
+          "email": "donald@tv.com"
+        }
+      ]
+    }
+
+  ]
+}

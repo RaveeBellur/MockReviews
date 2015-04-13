@@ -1,42 +1,37 @@
-import com.jayway.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.path.json.JsonPath.from;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.testng.Assert.assertEquals;
 
 public class GetPostsTests extends TestBase {
 
     @Test
-    public void shouldReturnAPostById() {
+    public void shouldAssertTitleOfAPost() {
 
         given()
                 .request()
         .when()
                 .get("http://localhost:8080/posts/1")
         .then()
-                .assertThat().statusCode(200)
-                .assertThat().body("title", equalTo("Palm tree"));
+                .assertThat().body("title", equalTo("Palm Tree"));
 
     }
 
     @Test
-    public void shouldReturnAllPosts() {
+    public void shouldReturnPostsByAuthor() {
 
-        String expectedResponseString="{[{" +
-                "\"title\":\"Palm tree\","+
-                "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
-                "\"email\":\"tom@tv.com\"" +
-                "}]}";
+        String responseString =
+                given()
+                        .request().with()
+                            .queryParam("author", "Tom")
+                .when()
+                        .get("http://localhost:8080/posts").asString();
 
-        Response response = given().request().with()
-                .contentType("application/json")
-                .when().get("http://localhost:8080/posts");
-
-        assertEquals(response.getStatusCode(), 200);
-        assertEquals(response.asString(), expectedResponseString);
-
+        assertEquals(from(responseString).getList("posts.findAll { p -> p.author == 'Tom'}").size(), 2);
 
     }
+
 
 }

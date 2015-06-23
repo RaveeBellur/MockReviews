@@ -5,31 +5,31 @@ import static com.jayway.restassured.path.json.JsonPath.from;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.testng.Assert.assertEquals;
 
-public class GetPostsTests extends TestBase {
+public class GetReviewsTests extends TestBase {
 
     @Test
-    public void shouldAssertTitleOfAPost() {
+    public void shouldAssertTitleOfReview() {
 
         given()
                 .request()
         .when()
-                .get("http://localhost:8080/posts/1")
+                .get("http://localhost:8080/reviews/1")
         .then()
                 .assertThat().body("title", equalTo("Palm Tree"));
 
     }
 
     @Test
-    public void shouldReturnPostsByAuthor() {
+    public void shouldReturnReviewsByAuthor() {
 
         String responseString =
                 given()
                         .request().with()
                             .queryParam("author", "Tom")
                 .when()
-                        .get("http://localhost:8080/posts").asString();
+                        .get("http://localhost:8080/reviews").asString();
 
-        assertEquals(from(responseString).getList("posts.findAll { p -> p.author == 'Tom'}").size(), 2);
+        assertEquals(from(responseString).getList("findAll { r -> r.author == 'Tom'}").size(), 2);
 
     }
 

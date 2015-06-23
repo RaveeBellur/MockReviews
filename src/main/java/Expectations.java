@@ -18,19 +18,38 @@ public class Expectations {
     }
 
     private void setExpectations() {
-        expectationForShouldAssertTitleOfAPost();
-        expectationForShouldReturnPostsByAuthor();
+        expectationForShouldCreateNewReview();
+        expectationForShouldAssertTitleOfReview();
+        expectationForShouldReturnReviewsByAuthor();
     }
 
-    private void expectationForShouldAssertTitleOfAPost() {
+    private void expectationForShouldCreateNewReview() {
+
+        String responseString = "{\"id\":\"1\"}";
+
+        mockServer
+                .when(
+                        request()
+                                .withPath("/reviews")
+                                .withMethod("POST"))
+                .respond(
+                        response()
+                                .withStatusCode(201)
+                                .withHeaders(
+                                        new Header("Content-Type", "application/json")
+                                )
+                                .withBody(responseString));
+    }
+
+    private void expectationForShouldAssertTitleOfReview() {
         Object o = from(new File("target/classes/data.json"))
-                .get("posts.findAll { p -> p.title == 'Palm Tree'}[0]");
+                .get("reviews.findAll { r -> r.title == 'Palm Tree'}[0]");
         String responseString = RequestHelper.getJsonString(o);
 
         mockServer
                 .when(
                         request()
-                                .withPath("/posts/1")
+                                .withPath("/reviews/1")
                                 .withMethod("GET"))
                 .respond(
                         response()
@@ -41,18 +60,18 @@ public class Expectations {
                                 .withBody(responseString));
     }
 
-    private void expectationForShouldReturnPostsByAuthor() {
+    private void expectationForShouldReturnReviewsByAuthor() {
         Object o = from(new File("target/classes/data.json"))
-                .getList("posts.findAll { p -> p.author == 'Tom'}");
-        String responseString = "{\"posts\": " + RequestHelper.getJsonString(o) + "}";
+                .getList("reviews.findAll { r -> r.author == 'Tom'}");
+        String responseString = RequestHelper.getJsonString(o);
 
 
         mockServer
                 .when(
                         request()
-                                .withPath("/posts")
                                 .withQueryStringParameters(
                                         new Parameter("author", "Tom"))
+                                .withPath("/reviews")
                                 .withMethod("GET"))
                 .respond(
                         response()

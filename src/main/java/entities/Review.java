@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 
-public class Post {
+public class Review {
     public String id;
     public String title;
     public String body;
@@ -10,7 +10,7 @@ public class Post {
     public String email;
     public List<Comment> comments;
 
-    public Post(String id, String title, String body, String author, String email, List<Comment> comments) {
+    public Review(String id, String title, String body, String author, String email, List<Comment> comments) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -19,7 +19,7 @@ public class Post {
         this.comments = comments;
     }
 
-    public Post(String id, String title, String body, String author, String email) {
+    public Review(String id, String title, String body, String author, String email) {
         this.id = id;
         this.title = title;
         this.body = body;

@@ -7,17 +7,7 @@ import static org.testng.Assert.assertEquals;
 
 public class GetReviewsTests extends TestBase {
 
-    @Test
-    public void shouldAssertTitleOfReview() {
 
-        given()
-                .request()
-        .when()
-                .get("http://localhost:8080/reviews/1")
-        .then()
-                .assertThat().body("title", equalTo("Palm Tree"));
-
-    }
 
     @Test
     public void shouldReturnReviewsByAuthor() {

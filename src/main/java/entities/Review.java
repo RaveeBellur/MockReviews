@@ -3,15 +3,18 @@ package entities;
 import java.util.List;
 
 public class Review {
-    public String id;
-    public String title;
-    public String body;
-    public String author;
-    public String email;
-    public List<Comment> comments;
+    private String id;
+    private String title;
+    private String body;
+    private String author;
+    private String email;
+    private List<Comment> comments;
 
-    public Review(String id, String title, String body, String author, String email, List<Comment> comments) {
-        this.id = id;
+    public Review() {
+
+    }
+
+    public Review(String title, String body, String author, String email, List<Comment> comments) {
         this.title = title;
         this.body = body;
         this.author = author;
@@ -19,8 +22,7 @@ public class Review {
         this.comments = comments;
     }
 
-    public Review(String id, String title, String body, String author, String email) {
-        this.id = id;
+    public Review(String title, String body, String author, String email) {
         this.title = title;
         this.body = body;
         this.author = author;

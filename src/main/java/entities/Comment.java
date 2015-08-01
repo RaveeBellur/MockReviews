@@ -1,10 +1,13 @@
 package entities;
 
 public class Comment {
-    public String id;
-    public String comment;
-    public String commenter;
-    public String email;
+    private String id;
+    private String comment;
+    private String commenter;
+    private String email;
+
+    public Comment() {
+    }
 
     public Comment(String id, String comment, String commenter, String email) {
         this.id = id;

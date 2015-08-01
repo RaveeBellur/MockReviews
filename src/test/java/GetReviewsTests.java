@@ -15,6 +15,7 @@ public class GetReviewsTests extends TestBase {
         String responseString =
                 given()
                         .request().with()
+                            .queryParam("format", "json")
                             .queryParam("author", "Tom")
                 .when()
                         .get("http://localhost:8080/reviews").asString();

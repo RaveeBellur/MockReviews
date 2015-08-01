@@ -10,6 +10,7 @@ public class Chapter1 extends TestBase {
 
         given()
                 .request().with()
+                    .queryParam("format", "json")
                     .body("\"title\":\"Palm Tree\"," +
                           "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
                           "\"author\":\"Tom\"," +
@@ -27,7 +28,9 @@ public class Chapter1 extends TestBase {
     public void shouldAssertTitleOfReview() {
 
         given()
-                .request()
+                .request().with()
+                    .queryParam("format", "json")
+
         .when()
                 .get("http://localhost:8080/reviews/1")
         .then()

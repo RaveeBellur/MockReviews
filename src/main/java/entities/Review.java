@@ -1,7 +1,9 @@
 package entities;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@XmlRootElement
 public class Review {
     private String id;
     private String title;

@@ -23,7 +23,9 @@ public class Chapter2 extends TestBase {
 
         Response response =
                 given()
-                    .request().with().body(requestBody)
+                    .request().with()
+                        .queryParam("format", "json")
+                        .body(requestBody)
                 .when()
                     .post("http://localhost:8080/reviews");
 
@@ -31,7 +33,8 @@ public class Chapter2 extends TestBase {
 
 
         given()
-                .request()
+                .request().with()
+                    .queryParam("format", "json")
         .when()
                 .get(String.format("http://localhost:8080/reviews/%s", reviewId))
         .then()

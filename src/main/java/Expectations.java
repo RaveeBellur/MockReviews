@@ -25,7 +25,8 @@ public class Expectations {
     }
 
     private void setExpectations() {
-        expectationForTitleValidations();
+        expectationForTitleEmptyValidations();
+        expectationForTitleMaxLengthValidations();
 
         expectationForCreateReviewJson();
         expectationForCreateReviewXml();
@@ -138,7 +139,7 @@ public class Expectations {
                                 .withBody(responseString));
     }
 
-    private void expectationForTitleValidations() {
+    private void expectationForTitleEmptyValidations() {
 
         final String title="";
         Review review = new Review(title, body, author, email);
@@ -157,6 +158,27 @@ public class Expectations {
                                         new Header("Content-Type", "application/json")
                                 )
                                 .withBody("{\"error\":\"_ERROR_TITLE_EMPTY\"}"));
+    }
+
+    private void expectationForTitleMaxLengthValidations() {
+
+        final String title="This is really long title";
+        Review review = new Review(title, body, author, email);
+
+        mockServer
+                .when(
+                        request()
+                                .withQueryStringParameter("format", "json")
+                                .withPath("/reviews")
+                                .withBody(RequestHelper.getJsonString(review))
+                                .withMethod("POST"))
+                .respond(
+                        response()
+                                .withStatusCode(403)
+                                .withHeaders(
+                                        new Header("Content-Type", "application/json")
+                                )
+                                .withBody("{\"error\":\"_ERROR_TITLE_MAX_LENGTH\"}"));
     }
 
 }

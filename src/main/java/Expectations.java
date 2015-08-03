@@ -1,3 +1,4 @@
+import entities.Review;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.Header;
 import org.mockserver.model.Parameter;
@@ -12,17 +13,26 @@ public class Expectations {
 
     private ClientAndServer mockServer;
 
+    final String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
+            "They are in the family Arecaceae. They grow in hot climates";
+    String author = "Tom";
+    String email = "tom@tv.com";
+
+
     public Expectations(ClientAndServer mockServer) {
         this.mockServer = mockServer;
         setExpectations();
     }
 
     private void setExpectations() {
+        expectationForTitleValidations();
+
         expectationForCreateReviewJson();
         expectationForCreateReviewXml();
         expectationForGetReviewJson();
         expectationForGetReviewXml();
         expectationForGetReviewsByAuthor();
+
     }
 
     private void expectationForCreateReviewJson() {
@@ -120,12 +130,33 @@ public class Expectations {
                                 .withPath("/reviews")
                                 .withMethod("GET"))
                 .respond(
-                response()
-                        .withStatusCode(200)
-                        .withHeaders(
-                                new Header("Content-Type", "application/json")
-                        )
-                        .withBody(responseString));
+                        response()
+                                .withStatusCode(200)
+                                .withHeaders(
+                                        new Header("Content-Type", "application/json")
+                                )
+                                .withBody(responseString));
+    }
+
+    private void expectationForTitleValidations() {
+
+        final String title="";
+        Review review = new Review(title, body, author, email);
+
+        mockServer
+                .when(
+                request()
+                        .withQueryStringParameter("format", "json")
+                        .withPath("/reviews")
+                        .withBody(RequestHelper.getJsonString(review))
+                        .withMethod("POST"))
+                .respond(
+                        response()
+                                .withStatusCode(403)
+                                .withHeaders(
+                                        new Header("Content-Type", "application/json")
+                                )
+                                .withBody("{\"error\":\"_ERROR_TITLE_EMPTY\"}"));
     }
 
 }

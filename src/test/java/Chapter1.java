@@ -6,8 +6,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class Chapter1 extends TestBase {
 
     @Test
-    public void shouldCreateNewReview() {
-
+    public void shouldCreateAReview() {
         given()
                 .request().with()
                     .queryParam("format", "json")
@@ -21,21 +20,17 @@ public class Chapter1 extends TestBase {
                 .assertThat()
                 .statusCode(201)
                 .body("id", notNullValue());
-
     }
 
     @Test
     public void shouldAssertTitleOfReview() {
-
         given()
                 .request().with()
                     .queryParam("format", "json")
-
         .when()
                 .get("http://localhost:8080/reviews/1")
         .then()
                 .assertThat().body("title", equalTo("Palm Tree"));
-
     }
 
 }

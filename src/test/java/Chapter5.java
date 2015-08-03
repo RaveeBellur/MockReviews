@@ -26,7 +26,6 @@ public class Chapter5 extends TestBase {
         assertEquals(actualReview.getAuthor(), review.getAuthor());
         assertEquals(actualReview.getEmail(), review.getEmail());
 
-
     }
 
     private Review getReview(String reviewId) {
@@ -41,7 +40,7 @@ public class Chapter5 extends TestBase {
             .request().with()
                 .queryParam("format", "json")
                 .body(review)
-        .when()
+        .then()
             .post("http://localhost:8080/reviews").as(Review.class);
     }
 

@@ -22,14 +22,14 @@ public class Chapter4 extends TestBase {
                     .request().with()
                         .queryParam("format", "xml")
                         .body(review, ObjectMapperType.JAXB)
-                .when()
+                .then()
                     .post("http://localhost:8080/reviews").as(Review.class, ObjectMapperType.JAXB).getId();
 
         Review actualReview =
                 given()
-                        .request().with()
-                            .queryParam("format", "xml")
-                            .get(String.format("http://localhost:8080/reviews/%s", reviewId)).as(Review.class, ObjectMapperType.JAXB);
+                    .request().with()
+                        .queryParam("format", "xml")
+                        .get(String.format("http://localhost:8080/reviews/%s", reviewId)).as(Review.class, ObjectMapperType.JAXB);
 
         assertEquals(actualReview.getTitle(), review.getTitle());
         assertEquals(actualReview.getBody(), review.getBody());

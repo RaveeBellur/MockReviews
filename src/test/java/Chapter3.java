@@ -21,21 +21,19 @@ public class Chapter3 extends TestBase {
                     .request().with()
                         .queryParam("format", "json")
                         .body(review)
-                .when()
+                .then()
                     .post("http://localhost:8080/reviews").as(Review.class).getId();
 
         Review actualReview =
                 given()
-                        .request().with()
-                            .queryParam("format", "json")
-                            .get(String.format("http://localhost:8080/reviews/%s", reviewId)).as(Review.class);
+                    .request().with()
+                        .queryParam("format", "json")
+                        .get(String.format("http://localhost:8080/reviews/%s", reviewId)).as(Review.class);
 
         assertEquals(actualReview.getTitle(), review.getTitle());
         assertEquals(actualReview.getBody(), review.getBody());
         assertEquals(actualReview.getAuthor(), review.getAuthor());
         assertEquals(actualReview.getEmail(), review.getEmail());
-
-
     }
 
 }

@@ -1,11 +1,9 @@
-import com.jayway.restassured.response.Response;
 import entities.Review;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
 import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.path.json.JsonPath.from;
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.core.IsEqual.equalTo;
+
 
 public class Chapter7 extends TestBase {
 
@@ -28,14 +26,15 @@ public class Chapter7 extends TestBase {
 
         Review review = new Review(title, body, author, email);
 
-        Response response = given()
-                .request().with()
-                    .queryParam("format", "json")
-                    .body(review)
-                .when()
-                    .post("http://localhost:8080/reviews");
+        given()
+            .request().with()
+                .queryParam("format", "json")
+                .body(review)
+            .when()
+                .post("http://localhost:8080/reviews")
+            .then()
+                .assertThat().body("error", equalTo(expectedError));
 
-        assertEquals(from(response.asString()).get("error"), expectedError);
 
 
     }

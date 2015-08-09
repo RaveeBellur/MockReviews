@@ -19,8 +19,8 @@ public class Chapter2 extends TestBase {
         String reviewId =
                 given()
                     .request().with()
-                    .queryParam("format", "json")
-                    .body(requestBody)
+                        .queryParam("format", "json")
+                        .body(requestBody)
                 .when()
                     .post("http://localhost:8080/reviews")
                 .then()

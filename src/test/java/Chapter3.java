@@ -1,3 +1,4 @@
+import com.jayway.restassured.response.Response;
 import entities.Review;
 import org.testng.annotations.Test;
 import static com.jayway.restassured.RestAssured.given;
@@ -5,30 +6,37 @@ import static org.testng.Assert.assertEquals;
 
 public class Chapter3 extends TestBase {
 
-    final String title = "Palm Tree";
-    final String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-            "They are in the family Arecaceae. They grow in hot climates";
-    final String author = "Tom";
-    final String email = "tom@tv.com";
-
     @Test
     public void shouldCreateAndGetReview() {
+        Review review = new Review(
+                "Palm Tree",
+                "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
+                        "They are in the family Arecaceae. They grow in hot climates",
+                "Tom",
+                "tom@tv.com");
 
-        Review review = new Review(title, body, author, email);
-
-        String reviewId =
+        Response createReviewResponse =
                 given()
                     .request().with()
                         .queryParam("format", "json")
                         .body(review)
+                .when()
+                    .post("http://localhost:8080/reviews")
                 .then()
-                    .post("http://localhost:8080/reviews").as(Review.class).getId();
+                        .extract().response();
 
-        Review actualReview =
+        String reviewId = createReviewResponse.as(Review.class).getId();
+
+        Response retrieveReviewResponse =
                 given()
-                    .request().with()
+                        .request().with()
                         .queryParam("format", "json")
-                        .get(String.format("http://localhost:8080/reviews/%s", reviewId)).as(Review.class);
+                .when()
+                    .get(String.format("http://localhost:8080/reviews/%s", reviewId))
+                .then()
+                    .extract().response();
+
+        Review actualReview = retrieveReviewResponse.as(Review.class);
 
         assertEquals(actualReview.getTitle(), review.getTitle());
         assertEquals(actualReview.getBody(), review.getBody());

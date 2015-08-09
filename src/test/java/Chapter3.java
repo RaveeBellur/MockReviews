@@ -26,7 +26,7 @@ public class Chapter3 extends TestBase {
 
         Review actualReview =
                 given()
-                        .request().with()
+                    .request().with()
                         .queryParam("format", "json")
                 .when()
                     .get(String.format("http://localhost:8080/reviews/%s", reviewId))

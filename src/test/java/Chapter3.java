@@ -1,4 +1,3 @@
-import com.jayway.restassured.response.Response;
 import entities.Review;
 import org.testng.annotations.Test;
 import static com.jayway.restassured.RestAssured.given;
@@ -15,7 +14,7 @@ public class Chapter3 extends TestBase {
                 "Tom",
                 "tom@tv.com");
 
-        Response createReviewResponse =
+        String reviewId =
                 given()
                     .request().with()
                         .queryParam("format", "json")
@@ -23,20 +22,16 @@ public class Chapter3 extends TestBase {
                 .when()
                     .post("http://localhost:8080/reviews")
                 .then()
-                        .extract().response();
+                    .extract().response().as(Review.class).getId();
 
-        String reviewId = createReviewResponse.as(Review.class).getId();
-
-        Response retrieveReviewResponse =
+        Review actualReview =
                 given()
                         .request().with()
                         .queryParam("format", "json")
                 .when()
                     .get(String.format("http://localhost:8080/reviews/%s", reviewId))
                 .then()
-                    .extract().response();
-
-        Review actualReview = retrieveReviewResponse.as(Review.class);
+                    .extract().response().as(Review.class);
 
         assertEquals(actualReview.getTitle(), review.getTitle());
         assertEquals(actualReview.getBody(), review.getBody());

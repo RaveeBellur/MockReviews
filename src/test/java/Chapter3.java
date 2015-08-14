@@ -51,7 +51,7 @@ public class Chapter3 extends TestBase {
 
         String reviewId =
                 given()
-                   .request().with()
+                    .request().with()
                         .queryParam("format", "xml")
                         .body(review, ObjectMapperType.JAXB)
                 .when()

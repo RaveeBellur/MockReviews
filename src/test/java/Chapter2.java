@@ -5,6 +5,17 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class Chapter2 extends TestBase {
 
     @Test
+    public void shouldAssertTitleOfReview() {
+        given()
+            .request().with()
+                .queryParam("format", "json")
+        .when()
+            .get("http://localhost:8080/reviews/1")
+        .then()
+            .assertThat().body("title", equalTo("Palm Tree"));
+    }
+
+    @Test
     public void shouldCreateAndGetReview() {
         String title = "Palm Tree";
         String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
@@ -27,8 +38,8 @@ public class Chapter2 extends TestBase {
                     .extract().jsonPath().get("id").toString();
 
         given()
-                .request().with()
-                    .queryParam("format", "json")
+            .request().with()
+                .queryParam("format", "json")
         .when()
                 .get(String.format("http://localhost:8080/reviews/%s", reviewId))
         .then()

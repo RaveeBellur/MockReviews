@@ -69,7 +69,7 @@ public class Expectations {
                         response()
                                 .withStatusCode(201)
                                 .withHeaders(
-                                        new Header("Content-Type", "application/json")
+                                        new Header("Content-Type", "application/xml")
                                 )
                                 .withBody(responseString));
     }
@@ -111,7 +111,7 @@ public class Expectations {
                         response()
                                 .withStatusCode(200)
                                 .withHeaders(
-                                        new Header("Content-Type", "application/json")
+                                        new Header("Content-Type", "application/xml")
                                 )
                                 .withBody(responseString));
     }

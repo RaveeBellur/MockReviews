@@ -13,8 +13,7 @@ public class Expectations {
 
     private ClientAndServer mockServer;
 
-    final String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-            "They are in the family Arecaceae. They grow in hot climates";
+    final String body = "Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.";
     String author = "Tom";
     String email = "tom@tv.com";
 
@@ -76,7 +75,7 @@ public class Expectations {
 
     private void expectationForGetReviewJson() {
         Object o = from(new File("target/classes/data.json"))
-                .get("reviews.findAll { r -> r.title == 'Palm Tree'}[0]");
+                .get("reviews.findAll { r -> r.title == 'Xiaomi Redmi Note 3'}[0]");
         String responseString = RequestHelper.getJsonString(o);
 
         mockServer
@@ -96,9 +95,8 @@ public class Expectations {
 
 
     private void expectationForGetReviewXml() {
-        String responseString = "<review><id>1</id><title>Palm Tree</title>" +
-                "<body>Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-                "They are in the family Arecaceae. They grow in hot climates</body>" +
+        String responseString = "<review><id>1</id><title>Xiaomi Redmi Note 3</title>" +
+                "<body>Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.</body>" +
                 "<author>Tom</author><email>tom@tv.com</email></review>";
 
         mockServer

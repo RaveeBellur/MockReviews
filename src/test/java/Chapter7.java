@@ -7,8 +7,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class Chapter7 extends TestBase {
 
-    final String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-            "They are in the family Arecaceae. They grow in hot climates";
+    final String body = "Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.";
     final String author = "Tom";
     final String email = "tom@tv.com";
 

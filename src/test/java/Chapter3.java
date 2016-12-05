@@ -8,9 +8,8 @@ public class Chapter3 extends TestBase {
     @Test
     public void shouldCreateAndGetReview() {
         Review review = new Review(
-                "Palm Tree",
-                "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-                        "They are in the family Arecaceae. They grow in hot climates",
+                "Xiaomi Redmi Note 3",
+                "Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.",
                 "Tom",
                 "tom@tv.com");
 

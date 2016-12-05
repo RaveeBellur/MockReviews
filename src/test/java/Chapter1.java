@@ -9,8 +9,8 @@ public class Chapter1 extends TestBase {
         given()
             .request().with()
                 .queryParam("format", "json")
-                .body("\"title\":\"Palm Tree\"," +
-                        "\"body\":\"Palm trees are a botanical family of perennial lianas, shrubs, and trees. They are in the family Arecaceae. They grow in hot climates\"," +
+                .body("\"title\":\"Xiaomi Redmi Note 3\"," +
+                        "\"body\":\"Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.\"," +
                         "\"author\":\"Tom\"," +
                         "\"email\":\"tom@tv.com\"")
         .when()

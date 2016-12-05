@@ -12,14 +12,13 @@ public class Chapter2 extends TestBase {
         .when()
             .get("http://localhost:8080/reviews/1")
         .then()
-            .assertThat().body("title", equalTo("Palm Tree"));
+            .assertThat().body("title", equalTo("Xiaomi Redmi Note 3"));
     }
 
     @Test
     public void shouldCreateAndGetReview() {
-        String title = "Palm Tree";
-        String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-                      "They are in the family Arecaceae. They grow in hot climates";
+        String title = "Xiaomi Redmi Note 3";
+        String body = "Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.";
         String author = "Tom";
         String email = "tom@tv.com";
         String requestBody = String.format("\"title\":%s," +

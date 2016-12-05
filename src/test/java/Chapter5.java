@@ -6,9 +6,8 @@ import static org.testng.Assert.assertEquals;
 
 public class Chapter5 extends TestBase {
 
-    final String title = "Palm Tree";
-    final String body = "Palm trees are a botanical family of perennial lianas, shrubs, and trees. " +
-            "They are in the family Arecaceae. They grow in hot climates";
+    final String title = "Xiaomi Redmi Note 3";
+    final String body = "Good hardware. The screen is huge and reproduces good colors. Watching Videos is fun on a 5.5 inch screen.";
     final String author = "Tom";
     final String email = "tom@tv.com";
 
